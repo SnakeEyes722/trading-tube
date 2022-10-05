@@ -245,7 +245,7 @@ function updatepassword(Request $req){
     }
 
     if (!(Hash::check($req->old_password,$user->password))) {
-        return response()->json(['message' => 'same pass']);
+        return response()->json(['message' => 'old password does not match']);
     }
     else{
         return response()->json([

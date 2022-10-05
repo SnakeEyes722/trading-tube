@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\ReferalController;
+use App\Http\Controllers\ApprovedepositController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,8 +32,12 @@ Route::post('/UpdatePackage/{id}',[PackageController::class,'UpdatePackage']);
 Route::post('/UpdatePackageStatus/{id}',[PackageController::class,'UpdatePackageStatus']);
 Route::post('/deletepackage/{id}',[PackageController::class,'deletepackage']);
 Route::post('/AddDeposit',[DepositController::class,'AddDeposit']);
-Route::post('/UpdateDeposit/{user_id}',[DepositController::class,'UpdateDeposit']);
-Route::post('/AddBalance',[BalanceController::class,'AddBalance']);
+// Route::post('/UpdateDeposit/{user_id}',[DepositController::class,'UpdateDeposit']);
+Route::post('/addDeposit',[DepositController::class,'addDeposit']);
+Route::post('/addreferrals',[ReferalController::class,'addreferrals']);
+Route::post('/show/{id}',[ApprovedepositController::class,'show']);
+
+
 
 
 
