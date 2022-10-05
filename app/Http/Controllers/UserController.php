@@ -12,6 +12,9 @@ class UserController extends Controller
     public function createuser(Request $req){
 
         $Errors = [];
+        // hello there
+
+        $djfd = 'sd';
         
         if(!$req->password or !$req->email or !$req->phone or !$req->username or !$req->password_confirmation or !$req->cnic or !$req->referal_code ){
             
