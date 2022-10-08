@@ -11,33 +11,34 @@ use Illuminate\Support\Facades\DB;
 
 class ApprovedepositController extends Controller
 {
-    function show(Request $req,$id){
-
+    function show(Request $req){
        
 
-        $deposit =Deposit::where('id',$id)->first();
+
+        $deposit = Deposit::where('id',$req->id)->first();
         $deposit -> verified = $req->verified??'false';
         $deposit -> update($req->all());
-            
-
-        $deposit = Deposit::get();
+       // $deposit = Deposit::get();
         
+
+        $total_deposit = $deposit->where('id',$req->id)->pluck('amount');
+        $balance = $deposit->where('id',$req->id)->pluck('amount');
+        $user_id = $deposit->where('id',$req->id)->pluck('payer_id');
+
+        if(Approve_deposit::where('user_id',$user_id)->exists()){
+            $depos = Approve_deposit::where('user_id',$user_id)->pluck('total_deposit');
+            $total_deposit = $depos->sum()+$balance->sum();
+
+            return $total_deposit;
+        }
         foreach($deposit as $key =>$value){
             Approve_deposit::updateOrCreate([
                 'balance'=>$value->amount,
                 'total_deposit'=>$value->amount,
-                'user_id'=>$value->payer_id,
-
-
+                'user_id'=>$value->payer_id, 
             ]);
-            
         }
-
-        $approve_deposits = Approve_deposit::where(['user_id' => $req->payer_id])->exists();
-            
-       return $approve_deposits;
-
-        //return 'data shifted';
+        return 'data shifted';
         // $result =  $deposit -> update($req->all());
     
         // if($result){
@@ -45,7 +46,7 @@ class ApprovedepositController extends Controller
         //     return response([
         //         "status" => '200',
         //         "message" =>'data has been updated'
-        //     ]);
+        //     ]); 
         // }
         // else{
         // return response([

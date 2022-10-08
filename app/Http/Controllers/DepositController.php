@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class DepositController extends Controller
 {
-    function AddDeposit(Request $req){
+    function AddDeposit(Request $req){  
 
-<<<<<<< HEAD
+
+
+        
+
+
         $deposit = new Deposit;
-        $deposit -> payer_id = $req->payer_id;
-        $deposit -> account_type = $req->account_type;
+         $deposit -> payer_id = $req->payer_id;
+          $deposit -> account_type = $req->account_type;
         $deposit -> account_title = $req->account_title;
         $deposit -> account_no = $req->account_no;
         $deposit -> status = $req->status;
@@ -25,23 +29,8 @@ class DepositController extends Controller
         $req->proof_image->move(public_path('post'),$pic);
         $path = "$pic";
         $deposit->proof_image=$path;
-
         $result =  $deposit -> save();
-=======
-         $deposit = new Deposit;
-         $deposit -> payer_id = $req->payer_id;
-         $deposit -> account_type = $req->account_type;
-         $deposit -> account_title = $req->account_title;
-         $deposit -> account_no = $req->account_no;
-         $deposit -> proof_image = $req->proof_image;
-
-         $deposit -> amount = $req->amount;
-         $deposit -> verified = $req->verified??'false';
-
-         $result =  $deposit -> save();
->>>>>>> 6f2efe27de77a420968f53db884c75e7b1291825
     
-
         if($result){
 
             return response([
@@ -58,7 +47,6 @@ class DepositController extends Controller
 
     }
 
-<<<<<<< HEAD
     // function UpdateDeposit(Request $req,$user_id){
 
 
@@ -112,8 +100,4 @@ class DepositController extends Controller
       
     // }
 
-    
-=======
-    
->>>>>>> 6f2efe27de77a420968f53db884c75e7b1291825
 }

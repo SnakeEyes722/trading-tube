@@ -35,7 +35,7 @@ Route::post('/AddDeposit',[DepositController::class,'AddDeposit']);
 // Route::post('/UpdateDeposit/{user_id}',[DepositController::class,'UpdateDeposit']);
 Route::post('/addDeposit',[DepositController::class,'addDeposit']);
 Route::post('/addreferrals',[ReferalController::class,'addreferrals']);
-Route::post('/show/{id}',[ApprovedepositController::class,'show']);
+Route::post('/show',[ApprovedepositController::class,'show']);
 
 
 
