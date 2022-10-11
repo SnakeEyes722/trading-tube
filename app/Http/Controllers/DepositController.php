@@ -47,6 +47,32 @@ class DepositController extends Controller
 
     }
 
+
+    public function fetchdepositwithid( Request $req){
+        $result = Deposit::where('payer_id',$req->user_id)->get();
+
+        
+
+        if($result){
+            return response([
+                "response" => '200',
+                "data" => $result
+            ],200);           }
+    }
+
+    public function getalldeposits( Request $req){
+        $result = Deposit::all();
+
+        
+
+        if($result){
+            return response([
+                "response" => '200',
+                "data" => $result
+            ],200);           }
+    }
+
+    
     // function UpdateDeposit(Request $req,$user_id){
 
 

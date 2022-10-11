@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 class UserController extends Controller
 {
@@ -13,8 +13,6 @@ class UserController extends Controller
 
         $Errors = [];
         // hello there
-
-        
         if(!$req->password or !$req->email or !$req->phone or !$req->username or !$req->password_confirmation or !$req->cnic or !$req->referal_code ){
             
            
@@ -257,4 +255,89 @@ function updatepassword(Request $req){
 }
     }
 
+    public function fetchallusers(){
+        return User::all();
+    }
+
+    public function updateuserwithid(Request $req,$id){
+ 
+        $Errors = [];
+        if(!$req->email or 
+        !$req->phone or !$req->username or 
+        !$req->cnic  ){
+            
+
+         if (!$req->email) {
+       $vars = (object)array("message"=>"Email is Required");
+
+           array_push($Errors,$vars);
+
+          } 
+
+          if (!$req->phone) {
+            $vars = (object)array("message"=>"Phone is Required");
+     
+                array_push($Errors,$vars);
+     
+               }
+            
+                       if (!$req->username) {
+                        $vars = (object)array("message"=>"username is Required");
+                 
+                            array_push($Errors,$vars);
+                 
+                           } 
+
+                           if (!$req->cnic) {
+                            $vars = (object)array("message"=>"cnic is Required");
+                     
+                                array_push($Errors,$vars);
+                     
+                               } 
+
+                         
+          return [
+            'data'=> $Errors,
+            'status'=> '401'
+            ]; 
+           }
+
+           $data=User::find($id);
+
+           $data-> email = $req->email;
+           $data-> phone = $req->phone;
+           $data-> cnic = $req->cnic;
+           $data-> username = $req->username;
+
+           $result =   $data->update($req->all());
+
+           if($result){
+            return response([
+                "response" => '200',
+                "message" =>'Updated'
+            ],200);           }
+
+    }
+
+    public function fetchuserwithid(Request $req,$id){
+        $result = User::find($id);
+
+        if($result){
+            return response([
+                "response" => '200',
+                "data" => $result
+            ],200);           }
+    }
+
+
+
+    public function deleteuserwithid(Request $req,$id){
+        $result = User::find($id)->delete();
+
+        if($result){
+            return response([
+                "response" => '200',
+                "message" => 'deleted'
+            ],200);           }
+    }
 }
