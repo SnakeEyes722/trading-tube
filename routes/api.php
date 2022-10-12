@@ -44,7 +44,7 @@ Route::post('/getalldeposits',[DepositController::class,'getalldeposits']);
 
 Route::post('/addreferrals',[ReferalController::class,'addreferrals']);
 Route::post('/show',[ApprovedepositController::class,'show']);
-
+Route::post('/verifywithdate',[ApprovedepositController::class,'verifywithdate']);
 
 
 
