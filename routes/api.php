@@ -8,6 +8,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\ReferalController;
 use App\Http\Controllers\ApprovedepositController;
+use App\Http\Controllers\InvestmentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,6 +46,9 @@ Route::post('/getalldeposits',[DepositController::class,'getalldeposits']);
 Route::post('/addreferrals',[ReferalController::class,'addreferrals']);
 Route::post('/show',[ApprovedepositController::class,'show']);
 Route::post('/verifywithdate',[ApprovedepositController::class,'verifywithdate']);
+Route::post('/AddInvestment',[InvestmentController::class,'AddInvestment']);
+Route::post('/fetchInvestment',[InvestmentController::class,'fetchInvestment']);
+
 
 
 
