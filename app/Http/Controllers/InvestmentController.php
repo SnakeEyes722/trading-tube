@@ -37,7 +37,7 @@ class InvestmentController extends Controller
 
         $response = DB::table('investments')->where('investor_id',$req->investor_id)
         ->join('packages','investments.package_id',"=",'packages.id')
-        ->select('packages.title','packages.quantity','packages.description','packages.status','packages.image','investments.investor_name','investments.applied_price','investments.applied_income','investments.package_id','investments.investor_id','investments.isfinished','investments.created_at','investments.updated_at')
+        ->select('packages.title','packages.quantity','packages.description','packages.status','packages.image','investments.investor_name','investments.applied_price','investments.applied_income','investments.package_id','investments.investor_id','investments.is_finished','investments.created_at','investments.updated_at')
         ->get();
 
         return response()->json(['data'=>$response], 201);
